@@ -33,23 +33,6 @@ RUN apt-get update \
     #&& sudo sudo /usr/bin/update-alternatives  --set g++ /usr/bin/g++ \
     && rm -rf /var/lib/apt/lists/* \
     && rm -rf /var/cache/apt/archives/*
-	
-# Build and install gcc 8
-RUN cd /opt \
-    && wget http://ftp.mirrorservice.org/sites/sourceware.org/pub/gcc/releases/gcc-8.4.0/gcc-8.4.0.tar.gz \
-    && tar zxf gcc-8.4.0.tar.gz \
-    && cd gcc-8.4.0 \
-    && ./contrib/download_prerequisites \
-    && apt -y install build-essential \
-    && ./configure --disable-multilib \
-    && make -j 4 \
-    && make install \
-    && cd \
-    && rm -rf /opt/gcc-8.4.0 /opt/gcc-8.4.0.tar.gz \
-    && sudo /usr/bin/update-alternatives --install /usr/bin/gcc gcc /usr/local/bin/gcc 1 \
-    && sudo /usr/bin/update-alternatives --install /usr/bin/g++ g++ /usr/local/bin/g++ 1 \
-    && sudo sudo /usr/bin/update-alternatives  --set gcc /usr/local/bin/gcc \
-    && sudo sudo /usr/bin/update-alternatives  --set g++ /usr/local/bin/g++
 
 # Build and install cmake >= 10 
 RUN cd /opt \
